@@ -1,0 +1,33 @@
+module ABS.Framework.Route;
+
+interface RouteConfig
+{
+	String route(String url);
+}
+
+class RouteConfigImpl implements RouteConfig
+{
+	String route(String url)
+	{
+		String result = case url
+		{
+		    // Service pages
+			"/customer/list.abs" => "manager:MCustomerResource.CustomerResourceImpl@list";
+			"/customer/create.abs" => "manager,operator:MCustomerResource.CustomerResourceImpl@create";
+			"/customer/retrieve.abs" => "manager,operator:MCustomerResource.CustomerResourceImpl@retrieve";
+			"/customer/update.abs" => "manager,operator:MCustomerResource.CustomerResourceImpl@update";
+			"/customer/delete.abs" => "manager:MCustomerResource.CustomerResourceImpl@delete";
+
+			"/account/list.abs" => "manager,operator:MAccountResource.AccountResourceImpl@list";
+			"/account/create.abs" => "manager,operator:MAccountResource.AccountResourceImpl@create";
+			"/account/retrieve.abs" => "manager,operator:MAccountResource.AccountResourceImpl@retrieve";
+			"/account/update.abs" => "manager,operator:MAccountResource.AccountResourceImpl@update";
+			"/account/delete.abs" => "manager,operator:MAccountResource.AccountResourceImpl@delete";
+			"/account/withdraw.abs" => "manager,operator:MAccountResource.AccountResourceImpl@withdraw";
+			"/account/deposit.abs" => "manager,operator:MAccountResource.AccountResourceImpl@deposit";
+			_ => "";
+		};
+		
+		return result;
+	}
+}
